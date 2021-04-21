@@ -1,7 +1,7 @@
 import challenge
 
 
-def test_end_2_end():
+def test_multiple_characters():
     test_input = "aaaabbbcca"
     expected = [
         ("a", 4),
@@ -9,7 +9,7 @@ def test_end_2_end():
         ("c", 2),
         ("a", 1)
     ]
-    actual = challenge.count_chars_in_order(test_input)
+    actual = challenge.count_characters(test_input)
     print(actual)
     assert actual == expected
 
@@ -23,23 +23,32 @@ def test_end_2_end():
         ("b", 3),
         ("d", 2)
     ]
-    actual = challenge.count_chars_in_order(test_input)
+    actual = challenge.count_characters(test_input)
     print(actual)
     assert actual == expected
 
 
 def test_single_char():
-    test_input = "aaaa"
+    test_input = "a"
     expected = [
-        ("a", 4)
+        ("a", 1)
     ]
-    actual = challenge.count_chars_in_order(test_input)
+    actual = challenge.count_characters(test_input)
     assert actual == expected
 
 
-def test_increase():
-    item = challenge.Character("a", 0)
-    item.increase()
-    assert item.count == 1
-    item.increase()
-    assert item.count == 2
+def test_multiple_chars_of_same_type():
+    test_input = "aaa"
+    expected = [
+        ("a", 3)
+    ]
+    actual = challenge.count_characters(test_input)
+    assert actual == expected
+
+
+def test_increase_count():
+    character = challenge.Character("a", 0)
+    character.increase_count()
+    assert character.count == 1
+    character.increase_count()
+    assert character.count == 2

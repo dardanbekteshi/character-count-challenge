@@ -4,10 +4,10 @@ from dataclasses import dataclass, astuple, field
 
 @dataclass
 class Character:
-    char: str
-    count: int
+    value: str
+    count: int = 1
 
-    def increase(self):
+    def increase_count(self):
         self.count += 1
 
 
@@ -15,29 +15,33 @@ class Character:
 class Characters:
     items: List[Character] = field(default_factory=list)
 
-    def add(self, item: Character) -> None:
-        self.items.append(item)
+    def add(self, char: Character) -> None:
+        self.items.append(char)
+        print(f"Added character {char.value}")
 
-    def is_current(self, char: str) -> bool:
-        return self.items[-1].char == char
+    def current(self) -> Character:
+        return self.items[-1]
 
-    def increase_current(self) -> None:
-        return self.items[-1].increase()
+    def was_previous(self, char: str) -> bool:
+        return self.current().value == char
 
     def __iter__(self):
         return iter(self.items)
 
 
-def count_chars_in_order(input_string: str) -> List[Tuple[str, int]]:
+def count_characters(input_string: str) -> List[Tuple[str, int]]:
     characters = Characters()
-    first, *rest = input_string
-    characters.add(Character(first, 1))
+    first_char, *rest_of_chars = input_string
+    characters.add(
+        Character(value=first_char)
+    )
 
-    for char in rest:
-        print(f"processing :{char}")
-        if characters.is_current(char):
-            characters.increase_current()
+    for char in rest_of_chars:
+        if characters.was_previous(char):
+            characters.current().increase_count()
         else:
-            characters.add(Character(char, 1))
+            characters.add(
+                Character(value=char)
+            )
 
     return [astuple(item) for item in characters]
