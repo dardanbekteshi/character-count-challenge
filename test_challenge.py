@@ -1,6 +1,31 @@
 import challenge
 
 
+def test_empty_input():
+    test_input = ""
+    expected = []
+    actual = challenge.count_characters(test_input)
+    assert actual == expected
+
+
+def test_single_char():
+    test_input = "a"
+    expected = [
+        ("a", 1)
+    ]
+    actual = challenge.count_characters(test_input)
+    assert actual == expected
+
+
+def test_multiple_chars_of_same_type():
+    test_input = "aaa"
+    expected = [
+        ("a", 3)
+    ]
+    actual = challenge.count_characters(test_input)
+    assert actual == expected
+
+
 def test_multiple_characters():
     test_input = "aaaabbbcca"
     expected = [
@@ -25,24 +50,6 @@ def test_multiple_characters():
     ]
     actual = challenge.count_characters(test_input)
     print(actual)
-    assert actual == expected
-
-
-def test_single_char():
-    test_input = "a"
-    expected = [
-        ("a", 1)
-    ]
-    actual = challenge.count_characters(test_input)
-    assert actual == expected
-
-
-def test_multiple_chars_of_same_type():
-    test_input = "aaa"
-    expected = [
-        ("a", 3)
-    ]
-    actual = challenge.count_characters(test_input)
     assert actual == expected
 
 

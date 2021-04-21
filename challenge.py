@@ -30,6 +30,8 @@ class Characters:
 
 
 def count_characters(input_string: str) -> List[Tuple[str, int]]:
+    if len(input_string) == 0:
+        return []
     characters = Characters()
     first_char, *rest_of_chars = input_string
     characters.add(
